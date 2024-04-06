@@ -1,0 +1,9 @@
+
+
+include_directories(.)
+
+aux_source_directory(. SRC_LIST)
+
+add_executable(test_protobuf ${SRC_LIST})
+
+target_link_libraries(test_protobuf protobuf)

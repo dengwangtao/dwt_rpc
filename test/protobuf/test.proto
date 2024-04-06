@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package dwt;
+
+option cc_generic_services = true;
+
+message LoginRequest {
+    bytes name = 1;
+    bytes password = 2;
+}
+
+message LoginResponse {
+    int32 errCode = 1;
+    bytes errMsg = 2;
+    bool success = 3;
+}
+
+service LoginRpc{
+    rpc doLogin (LoginRequest) returns (LoginResponse);
+}
