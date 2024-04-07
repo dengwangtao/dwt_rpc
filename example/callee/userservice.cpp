@@ -4,7 +4,7 @@
 #include "user.pb.h"
 
 #include "dwtrpcapplication.hpp"
-#include "rpcprovider.hpp"
+#include "dwtrpcprovider.hpp"
 
 
 // rpc 服务提供者
@@ -31,8 +31,8 @@ public:
 
         bool success = this->Login(request->name(), request->password());
         response->set_success(success);
-        response->mutable_result()->set_errcode(0);
-        response->mutable_result()->set_errmsg("");
+        response->mutable_result()->set_errcode(1);
+        response->mutable_result()->set_errmsg("login error");
 
         done->Run();
     }
@@ -46,7 +46,7 @@ int main(int argc, char** argv) {
     DwtRpcApplication::Init(argc, argv);
 
     // 将服务发布到rpc节点
-    RpcProvider provider;
+    DwtRpcProvider provider;
     provider.NotifyService(new UserService());
 
     provider.Run();

@@ -12,7 +12,7 @@ DwtRpcConfig DwtRpcApplication::m_config; // 静态成员类外初始化
 void DwtRpcApplication::Init(int argc, char** argv) {
 
     cmdline::parser parser; // 命令行参数分析器
-    parser.add<std::string> ("config", 'f', "configuration file");
+    parser.add<std::string> ("config", 'c', "configuration file");
     parser.add<int>("loglevel", 'l', "log level (0~5)", false, 2, cmdline::range(0, 5)); // 日志等级 0~5
 
     parser.parse_check(argc, argv);

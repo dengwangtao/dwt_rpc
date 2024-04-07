@@ -1,4 +1,4 @@
-//Address: https://github.com/tanakh/cmdline/tree/master
+//Address: https://github.com/tanakh/cmdline/
 
 /*
   Copyright (c) 2009, Hideyuki Tanaka
