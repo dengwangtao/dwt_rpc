@@ -2,6 +2,11 @@
 
 #include "dwtrpcconfig.hpp"
 
+// 统一包含头文件
+#include "dwtrpcprovider.hpp"
+#include "dwtrpcchannel.hpp"
+#include "dwtrpccontroller.hpp"
+
 class DwtRpcApplication {
 
 public:

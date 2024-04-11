@@ -27,9 +27,15 @@ private:
     // Closure的回调
     void sendRpcResponse(const muduo::net::TcpConnectionPtr&, google::protobuf::Message*);
 
+
+    // 嵌套类 MyClosure
     class MyClosure: public google::protobuf::Closure {
     public:
+        MyClosure(const muduo::net::TcpConnectionPtr& conn, google::protobuf::Message* response);
         void Run() override;
+    private:
+        const muduo::net::TcpConnectionPtr& conn;
+        const google::protobuf::Message* response;
     };
 
 private:

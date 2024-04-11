@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+option cc_generic_services = true;
+
+package dwt;
+
+message InfoRequest {
+    int32 uid = 1;
+    int32 type = 2;
+}
+
+message InfoResponse {
+    bool success = 1;
+    int32 size = 2;
+    repeated bytes info = 3;
+}
+
+service InfoServiceRpc {
+    rpc GetInfo (InfoRequest) returns (InfoResponse);
+}
+
+

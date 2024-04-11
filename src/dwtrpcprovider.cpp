@@ -5,6 +5,7 @@
 #include <google/protobuf/descriptor.h>
 #include <muduo/base/Logging.h>
 
+
 void DwtRpcProvider::NotifyService(::google::protobuf::Service *service) {
 
     // 发布远程调用方法. 反射
@@ -103,8 +104,8 @@ void DwtRpcProvider::onMessage(
     LOG_INFO << "method_name: "  << method_name;
     LOG_INFO << "args_size: "  << args_size;
     LOG_INFO << "header_size: "  << header_size;
-    LOG_INFO << "args_str: "  << args_str;
-    LOG_INFO << "=========================";
+    // LOG_INFO << "args_str: "  << args_str;
+    LOG_INFO << "=========================\n";
 
     
     if(!m_serviceMap.count(service_name)) {
@@ -130,12 +131,14 @@ void DwtRpcProvider::onMessage(
         return;
     }
 
-    auto done = 
-        google::protobuf::NewCallback
-            <DwtRpcProvider, const muduo::net::TcpConnectionPtr&, google::protobuf::Message*>
-            (this, &DwtRpcProvider::sendRpcResponse, conn, response);
+    // auto done = 
+    //     google::protobuf::NewCallback
+    //         <DwtRpcProvider, const muduo::net::TcpConnectionPtr&, google::protobuf::Message*>
+    //         (this, &DwtRpcProvider::sendRpcResponse, conn, response);
 
-    service->CallMethod(method, nullptr, request, response, done);
+    auto done = MyClosure(conn, response);
+
+    service->CallMethod(method, nullptr, request, response, &done);
 }
 
 void DwtRpcProvider::sendRpcResponse(const muduo::net::TcpConnectionPtr& conn, google::protobuf::Message* response) {
@@ -150,6 +153,18 @@ void DwtRpcProvider::sendRpcResponse(const muduo::net::TcpConnectionPtr& conn, g
     conn->shutdown();
 }
 
+
+DwtRpcProvider::MyClosure::MyClosure(const muduo::net::TcpConnectionPtr& conn, google::protobuf::Message* response)
+    :conn(conn), response(response) {}
+
 void DwtRpcProvider::MyClosure::Run() {
-    // nothing
+    std::string reponse_str;
+
+    if(response->SerializeToString(&reponse_str)) {
+        conn->send(reponse_str);                // 将数据发送
+    } else {
+        LOG_ERROR << "Serialize Error: " << reponse_str;
+    }
+
+    conn->shutdown();   // 关闭连接
 }

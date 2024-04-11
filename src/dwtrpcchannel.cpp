@@ -30,6 +30,9 @@ void DwtRpcChannel::CallMethod(
         args_size = args_str.size();
     } else {
         std::cout << "request SerializeToString Error" << std::endl;
+        if(controller) {
+            controller->SetFailed("request SerializeToString Error");
+        }
         return;
     }
 
@@ -44,6 +47,9 @@ void DwtRpcChannel::CallMethod(
         header_size = header_str.size();
     } else {
         std::cout << "Header SerializeToString Error" << std::endl;
+        if(controller) {
+            controller->SetFailed("Header SerializeToString Error");
+        }
         return;
     }
 
@@ -63,12 +69,15 @@ void DwtRpcChannel::CallMethod(
     if(cfd == -1) {
         perror("socket");
         close(cfd);
+        if(controller) {
+            controller->SetFailed("create socket error");
+        }
         return;
     }
 
     uint16_t port = std::stoi(DwtRpcApplication::getConfig().Get("rpcserver_port"));
     const char* ip = DwtRpcApplication::getConfig().Get("rpcserver_ip").c_str();
-    std::cout << "Address: " << ip << ":" << port << std::endl;
+    // std::cout << "Address: " << ip << ":" << port << std::endl;
 
     struct sockaddr_in server_addr;
     server_addr.sin_family = AF_INET;
@@ -79,6 +88,9 @@ void DwtRpcChannel::CallMethod(
     if(res == -1) {
         perror("connect");
         close(cfd);
+        if(controller) {
+            controller->SetFailed("connect error");
+        }
         return;
     }
 
@@ -86,6 +98,9 @@ void DwtRpcChannel::CallMethod(
     if(res == -1) {
         perror("write");
         close(cfd);
+        if(controller) {
+            controller->SetFailed("send error");
+        }
         return;
     }
 
@@ -96,6 +111,9 @@ void DwtRpcChannel::CallMethod(
     if(res == -1) {
         perror("read");
         close(cfd);
+        if(controller) {
+            controller->SetFailed("recv error");
+        }
         return;
     }
 
@@ -104,6 +122,9 @@ void DwtRpcChannel::CallMethod(
 
     if(!response->ParseFromString(respose_str)) {
         std::cout << "response ParseFromString Error" << std::endl;
+        if(controller) {
+            controller->SetFailed("response ParseFromString Error");
+        }
     }
 
     close(cfd);
