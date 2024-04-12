@@ -4,7 +4,7 @@
 #include "user.pb.h"
 #include "info.pb.h"
 
-#include "dwtrpcapplication.hpp"
+#include "dwt_rpc_application.h"
 
 
 

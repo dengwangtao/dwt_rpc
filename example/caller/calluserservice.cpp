@@ -1,5 +1,5 @@
 #include <iostream>
-#include "dwtrpcapplication.hpp"
+#include "dwt_rpc_application.h"
 #include "user.pb.h"
 #include "info.pb.h"
 
@@ -63,6 +63,24 @@ int main(int argc, char** argv) {
 
         req.set_uid(123456);
         req.set_type(8);
+
+        DwtRpcController controller;
+        stub2.GetInfo(&controller, &req, &res, nullptr);
+
+        if(!controller.Failed() && res.success()) {
+            std::cout << "receive " << res.size() << " data =====" << std::endl;
+            for(int i = 0; i < res.info_size(); ++ i) {
+                std::cout << "\t" << res.info(i) << std::endl;
+            }
+        }
+    }
+
+    {
+        dwt::InfoRequest req;
+        dwt::InfoResponse res;
+
+        req.set_uid(654321);
+        req.set_type(5);
 
         DwtRpcController controller;
         stub2.GetInfo(&controller, &req, &res, nullptr);
