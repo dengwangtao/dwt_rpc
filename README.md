@@ -5,22 +5,7 @@ RPC框架
 
 基本过程：
 
-```mermaid
-flowchart LR
-call([call]) --> protobuf[[protubuf序列化]]
-
-protobuf --> zk[[通过zk查找服务]]
-
-zk --> net{{发起tcp连接}}
-
-net --> do[[根据服务名称和方法名称找到callee]]
-
-do --> unser[[protobuf反序列化]]
-
-unser --> callee([callee 执行方法，返回结果])
-```
-
-![rpc](.\rpc.png)
+![rpc](https://github.com/dengwangtao/dwt_rpc/blob/main/rpc.png?raw=true)
 
 ## 开发环境
 
