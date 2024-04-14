@@ -5,6 +5,7 @@
 #include <vector>
 #include <string>
 #include "rpcheader.pb.h"
+#include "zookeeper_util.h"
 
 #include <sys/socket.h>
 #include <sys/types.h>
@@ -75,14 +76,33 @@ void DwtRpcChannel::CallMethod(
         return;
     }
 
-    uint16_t port = std::stoi(DwtRpcApplication::getConfig().Get("rpcserver_port"));
-    const char* ip = DwtRpcApplication::getConfig().Get("rpcserver_ip").c_str();
-    // std::cout << "Address: " << ip << ":" << port << std::endl;
+
+    // 根据配置文件获取服务提供者的ip和端口
+    // uint16_t port = std::stoi(DwtRpcApplication::getConfig().Get("rpcserver_port"));
+    // const char* ip = DwtRpcApplication::getConfig().Get("rpcserver_ip").c_str();
+
+    // 根据zookeeper获取服务
+    ZkClient zkcli;
+    zkcli.Start();
+
+    std::string path = "/" + service_name + "/" + method_name;
+    std::string ip_port = zkcli.GetData(path.c_str());
+    int sep = -1;
+    if(ip_port == "" || (sep = ip_port.find(':')) == std::string::npos) {
+        controller->SetFailed(path + "is not found!");
+        return;
+    }
+
+    std::string ip = ip_port.substr(0, sep);
+    uint16_t port = stoi(ip_port.substr(sep + 1, ip_port.size() - sep));
+
+
+    //std::cout << " ====================== Address: " << ip << ":" << port << std::endl;
 
     struct sockaddr_in server_addr;
     server_addr.sin_family = AF_INET;
     server_addr.sin_port = htons(port);
-    server_addr.sin_addr.s_addr = inet_addr(ip);
+    server_addr.sin_addr.s_addr = inet_addr(ip.c_str());
     
     int res = connect(cfd, (struct sockaddr*)&server_addr, sizeof(server_addr));
     if(res == -1) {

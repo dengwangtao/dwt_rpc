@@ -1,6 +1,7 @@
 #include "dwt_rpc_provider.h"
 #include "dwt_rpc_application.h"
 #include "rpcheader.pb.h"
+#include "zookeeper_util.h"
 
 #include <google/protobuf/descriptor.h>
 #include <muduo/base/Logging.h>
@@ -30,11 +31,10 @@ void DwtRpcProvider::NotifyService(::google::protobuf::Service *service) {
 
 
 void DwtRpcProvider::Run() {
+    std::string ip = DwtRpcApplication::getConfig().Get("rpcserver_ip");
+    int port = std::stoi(DwtRpcApplication::getConfig().Get("rpcserver_port"));
     
-    muduo::net::InetAddress addr(
-        DwtRpcApplication::getConfig().Get("rpcserver_ip"),             // IP
-        std::stoi(DwtRpcApplication::getConfig().Get("rpcserver_port")) // Port
-    );
+    muduo::net::InetAddress addr(ip, port);
     // tcpserver
     muduo::net::TcpServer server(&m_eventloop, addr, "dwt_rpc");
 
@@ -51,6 +51,33 @@ void DwtRpcProvider::Run() {
     );
 
     server.setThreadNum(4);
+
+
+    // ===============================
+    // 将服务注册到zk
+    ZkClient zkcli;
+    zkcli.Start();
+    
+    for(auto& service : m_serviceMap) {
+        const std::string& service_name = service.first;
+        const ServiceInfo& service_info = service.second;
+
+        std::string service_path = "/" + service_name;
+        zkcli.Create(service_path.c_str(), nullptr, 0); // 0 为永久节点
+
+        for(auto& m : service_info.m_methodMap) {
+            const std::string& method_name = m.first;
+            std::string method_path = service_path + "/" + method_name;
+
+            char method_data[64] = {0};
+            sprintf(method_data, "%s:%d", ip.c_str(), port);
+
+            zkcli.Create(method_path.c_str(), method_data, strlen(method_data), ZOO_EPHEMERAL); // 临时节点
+        }
+    }
+    // ===============================
+
+    DWT_LOG_INFO("RpcProvider start service at %s:%d", ip.c_str(), port);
     
     server.start();     // 启动
     m_eventloop.loop(); // 启动事件循环

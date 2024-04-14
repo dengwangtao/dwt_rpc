@@ -2,8 +2,8 @@
     "rpcserver_ip": "127.0.0.1",
     "rpcserver_port": "8888",
 
-    "zookeeper_ip": "127.0.0.1",
-    "zookeeper_port": "8500",
+    "zookeeper_ip": "local-zookeeper",
+    "zookeeper_port": "2181",
 
     "log_path": "./log/"
 }
