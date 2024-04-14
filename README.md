@@ -112,7 +112,7 @@ docker run -d -e TZ="Asia/Shanghai" -p 21810:2181 -v C:\docker_v\local-zookeeper
 
 
 ### 第三方库
-- jsonhpp (配置文件)
-- cmdline (解析命令行参数)
-- muduo (网络通信)
-- zookeeper (zk客户端C接口)
+- jsonhpp：[nlohmann/json: JSON for Modern C++ (github.com)](https://github.com/nlohmann/json) (配置文件)
+- cmdline：[tanakh/cmdline: A Command Line Parser (github.com)](https://github.com/tanakh/cmdline) (解析命令行参数)
+- muduo：[chenshuo/muduo: Event-driven network library for multi-threaded Linux server in C++11 (github.com)](https://github.com/chenshuo/muduo) (网络通信)
+- zookeeper：[zookeeper Tags | Docker Hub](https://hub.docker.com/_/zookeeper/tags) (zk客户端C接口)
