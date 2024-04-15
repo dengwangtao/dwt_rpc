@@ -1,0 +1,40 @@
+2024-04-15 05:22:51.116761 [info] : zookeeper_init success
+2024-04-15 05:22:51.117131 [info] : service [/UserServiceRpc/Login] at 127.0.0.1:8800
+2024-04-15 05:22:51.122487 [info] : zookeeper_init success
+2024-04-15 05:22:51.123144 [info] : service [/UserServiceRpc/Register] at 127.0.0.1:8800
+2024-04-15 05:22:51.128265 [info] : zookeeper_init success
+2024-04-15 05:22:51.129090 [info] : service [/InfoServiceRpc/GetInfo] at 127.0.0.1:8801
+2024-04-15 05:22:51.136601 [info] : zookeeper_init success
+2024-04-15 05:22:51.137304 [info] : service [/InfoServiceRpc/GetInfo] at 127.0.0.1:8801
+2024-04-15 05:23:07.835935 [info] : zookeeper_init success
+2024-04-15 05:23:07.836311 [info] : service [/UserServiceRpc/Login] at 127.0.0.1:8800
+2024-04-15 05:23:07.840750 [info] : zookeeper_init success
+2024-04-15 05:23:07.841179 [info] : service [/UserServiceRpc/Register] at 127.0.0.1:8800
+2024-04-15 05:23:07.846460 [info] : zookeeper_init success
+2024-04-15 05:23:07.846827 [info] : service [/InfoServiceRpc/GetInfo] at 127.0.0.1:8801
+2024-04-15 05:23:07.851919 [info] : zookeeper_init success
+2024-04-15 05:23:07.852666 [info] : service [/InfoServiceRpc/GetInfo] at 127.0.0.1:8801
+2024-04-15 05:23:28.501748 [info] : zookeeper_init success
+2024-04-15 05:23:28.502243 [info] : service [/UserServiceRpc/Login] at 127.0.0.1:8800
+2024-04-15 05:23:28.506877 [info] : zookeeper_init success
+2024-04-15 05:23:28.507348 [info] : service [/UserServiceRpc/Register] at 127.0.0.1:8800
+2024-04-15 05:23:28.512713 [info] : zookeeper_init success
+2024-04-15 05:23:28.513593 [info] : service [/InfoServiceRpc/GetInfo] at 127.0.0.1:8801
+2024-04-15 05:23:28.520698 [info] : zookeeper_init success
+2024-04-15 05:23:28.521580 [info] : service [/InfoServiceRpc/GetInfo] at 127.0.0.1:8801
+2024-04-15 05:24:15.765326 [info] : zookeeper_init success
+2024-04-15 05:24:15.766161 [error]: get znode error: /UserServiceRpc/Login
+2024-04-15 05:24:15.771668 [info] : zookeeper_init success
+2024-04-15 05:24:15.772472 [error]: get znode error: /UserServiceRpc/Register
+2024-04-15 05:24:15.778008 [info] : zookeeper_init success
+2024-04-15 05:24:15.778648 [info] : service [/InfoServiceRpc/GetInfo] at 127.0.0.1:8801
+2024-04-15 05:24:15.782980 [info] : zookeeper_init success
+2024-04-15 05:24:15.783542 [info] : service [/InfoServiceRpc/GetInfo] at 127.0.0.1:8801
+2024-04-15 05:24:22.136145 [info] : zookeeper_init success
+2024-04-15 05:24:22.136433 [error]: get znode error: /UserServiceRpc/Login
+2024-04-15 05:24:22.140426 [info] : zookeeper_init success
+2024-04-15 05:24:22.140989 [error]: get znode error: /UserServiceRpc/Register
+2024-04-15 05:24:22.146353 [info] : zookeeper_init success
+2024-04-15 05:24:22.147203 [info] : service [/InfoServiceRpc/GetInfo] at 127.0.0.1:8801
+2024-04-15 05:24:22.152668 [info] : zookeeper_init success
+2024-04-15 05:24:22.153305 [info] : service [/InfoServiceRpc/GetInfo] at 127.0.0.1:8801

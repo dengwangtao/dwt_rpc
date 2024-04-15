@@ -1,0 +1,8 @@
+2024-04-15 05:22:37.099017 [info] : zookeeper_init success
+2024-04-15 05:22:37.102472 [info] : znode create successfuly: path = /InfoServiceRpc/GetInfo
+2024-04-15 05:22:37.102959 [info] : RpcProvider start service at 127.0.0.1:8801
+2024-04-15 05:22:51.130157 [info] : call InfoServiceRpc.GetInfo
+2024-04-15 05:22:51.138120 [info] : call InfoServiceRpc.GetInfo
+2024-04-15 05:23:07.847181 [info] : call InfoServiceRpc.GetInfo
+2024-04-15 05:23:07.853223 [info] : call InfoServiceRpc.GetInfo
+2024-04-15 05:23:28.514132 [info] : call InfoServiceRpc.GetInfo

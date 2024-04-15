@@ -127,10 +127,10 @@ void DwtRpcProvider::onMessage(
     }
 
 
-    LOG_INFO << "========================= ";
     DWT_LOG_INFO("call %s.%s", service_name.c_str(), method_name.c_str());
-    LOG_INFO << "service_name: " << service_name << "\tmethod_name: " << method_name;
-    LOG_INFO << "========================= ";
+    // LOG_INFO << "========================= ";
+    // LOG_INFO << "service_name: " << service_name << "\tmethod_name: " << method_name;
+    // LOG_INFO << "========================= ";
 
     // LOG_INFO << "=========================";
     // LOG_INFO << "header_size: "  << header_size;
@@ -187,7 +187,7 @@ void DwtRpcProvider::sendRpcResponse(const muduo::net::TcpConnectionPtr& conn, g
         DWT_LOG_ERROR("Serialize Error: %s", reponse_str.c_str());
     }
 
-    LOG_INFO << "连接关闭";
+    LOG_INFO << "连接关闭: " << conn->getTcpInfoString();
 
     conn->shutdown();
 }

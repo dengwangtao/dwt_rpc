@@ -2,7 +2,7 @@
 
 aux_source_directory(. SRC_LIST)
 
-add_executable(provider ${SRC_LIST} ../user.pb.cc ../info.pb.cc)
+add_executable(provider ${SRC_LIST} ../user.pb.cc)
 
-# 链接动态库
+# 链接库
 target_link_libraries(provider dwtrpc protobuf)

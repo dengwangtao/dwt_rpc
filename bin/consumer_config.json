@@ -1,0 +1,6 @@
+{
+    "zookeeper_ip": "local-zookeeper",
+    "zookeeper_port": "2181",
+
+    "log_path": "./log/consumer/"
+}

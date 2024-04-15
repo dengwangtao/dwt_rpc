@@ -1,0 +1,7 @@
+2024-04-15 05:22:27.190190 [info] : zookeeper_init success
+2024-04-15 05:22:27.192755 [info] : znode create successfuly: path = /UserServiceRpc/Register
+2024-04-15 05:22:27.195048 [info] : znode create successfuly: path = /UserServiceRpc/Login
+2024-04-15 05:22:27.195305 [info] : RpcProvider start service at 127.0.0.1:8800
+2024-04-15 05:22:51.117552 [info] : call UserServiceRpc.Login
+2024-04-15 05:22:51.123556 [info] : call UserServiceRpc.Register
+2024-04-15 05:23:07.836614 [info] : call UserServiceRpc.Login

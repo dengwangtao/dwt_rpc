@@ -65,7 +65,7 @@ void DwtRpcChannel::CallMethod(
 
 
 
-    // 网络发送
+    // 创建socket
     int cfd = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
     if(cfd == -1) {
         perror("socket");
@@ -77,11 +77,7 @@ void DwtRpcChannel::CallMethod(
     }
 
 
-    // 根据配置文件获取服务提供者的ip和端口
-    // uint16_t port = std::stoi(DwtRpcApplication::getConfig().Get("rpcserver_port"));
-    // const char* ip = DwtRpcApplication::getConfig().Get("rpcserver_ip").c_str();
-
-    // 根据zookeeper获取服务
+    // 根据zookeeper获取服务的ip和port
     ZkClient zkcli;
     zkcli.Start();
 
@@ -95,6 +91,9 @@ void DwtRpcChannel::CallMethod(
 
     std::string ip = ip_port.substr(0, sep);
     uint16_t port = stoi(ip_port.substr(sep + 1, ip_port.size() - sep));
+
+    
+    DWT_LOG_INFO("service [%s] at %s:%d", path.c_str(), ip.c_str(), port);
 
 
     //std::cout << " ====================== Address: " << ip << ":" << port << std::endl;
